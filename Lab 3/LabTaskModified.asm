@@ -2,11 +2,12 @@
 .stack 100h
 .data    
 
-m1 db "Enter any input: $"
-m2 db 0AH, 0DH, "Input is a number$"
-m3 db 0AH, 0DH, "Input is a capital letter$"
-m4 db 0AH, 0DH, "Input is a small letter$"
-m5 db 0AH, 0DH, "Invalid$"
+m1 db "Enter any input: $"  
+nl db 0AH, 0DH, "$"
+m2 db " is a number$"
+m3 db " is a capital letter$"
+m4 db " is a small letter$"
+m5 db " is invalid$"
                                            
 input db ?
 
@@ -41,9 +42,15 @@ main proc
     ;print number msg
     number:
     mov ah, 9
-    lea dx, m2
+    lea dx, nl
+    int 21h   
+    mov ah, 2
+    mov dl, input
     int 21h
-    jmp ending     
+    mov ah, 9
+    lea dx, m2
+    int 21h      
+    jmp ending
     
     ;compare input with A
     letter:
@@ -72,22 +79,40 @@ main proc
     ;print small msg  
     small:
     mov ah, 9
+    lea dx, nl
+    int 21h   
+    mov ah, 2
+    mov dl, input
+    int 21h
+    mov ah, 9
     lea dx, m4
-    int 21h    
+    int 21h      
     jmp ending
                
     ;print capital msg
     capital:
     mov ah, 9
+    lea dx, nl
+    int 21h   
+    mov ah, 2
+    mov dl, input
+    int 21h
+    mov ah, 9
     lea dx, m3
-    int 21h        
+    int 21h      
     jmp ending
                
     ;print invalid msg
     invalid:
     mov ah, 9
-    lea dx, m5
+    lea dx, nl
+    int 21h   
+    mov ah, 2
+    mov dl, input
     int 21h
+    mov ah, 9
+    lea dx, m5
+    int 21h      
     jmp ending
     
     ;return resources
