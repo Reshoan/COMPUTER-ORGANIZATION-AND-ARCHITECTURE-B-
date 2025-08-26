@@ -28,11 +28,11 @@ main proc
     REPEAT:
         int 21h
         cmp al, ' '       
-        je END_INPUT
+        je END_REPEAT
         inc count
         jmp REPEAT
 
-    END_INPUT:
+    END_REPEAT:
         mov ah, 9
         lea dx, nl
         int 21h

@@ -42,7 +42,7 @@ main proc
         mov dl, count 
         add dl, '0'
         int 21h
-        jmp Endl;
+        jmp Endl
         
                 
     Endl:
