@@ -16,7 +16,7 @@ main proc
     mov ds, ax
     
     
-    mov count, '0'
+    mov count, 0
     
     mov ah, 9
     lea dx, enterMsg
@@ -39,9 +39,9 @@ main proc
         lea dx, countMsg
         int 21h
         mov ah, 2
-        mov dl, count
+        mov dl, count 
+        add dl, '0'
         int 21h
-        
         jmp Endl;
         
                 
