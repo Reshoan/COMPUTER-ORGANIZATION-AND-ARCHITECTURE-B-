@@ -8,13 +8,15 @@
 
 value db ? 
 countOne db ?
-countZero db ?         
+countZero db ?
+revVal db ?         
            
 evenMsg db "This is an even number. $"  
 oddMsg db "This is an odd number. $"   
 
 oneMsg db "Number of one: $"
-zeroMsg db "Number of zero: $" 
+zeroMsg db "Number of zero: $"  
+revAns db "Reverse ans in binary: $"
 
 nl db 0Dh,0Ah,'$'     
 
@@ -25,7 +27,7 @@ main proc
     mov ds, ax  
     
     ;define value
-    mov value, 9bh     ;10011011 reversed should be 11011001 which is D9h
+    mov value, 01h     ;10011011 reversed should be 11011001 which is D9h
     mov bh, value
     
     ;even or odd test
@@ -106,6 +108,40 @@ main proc
     rcr bl, 1
     loop reverse
     mov bh, bl
+    jmp revPrint    
+            
+    ;bonus
+    revPrint:
+    mov ah, 9
+    lea dx, nl
+    int 21h 
+
+    lea dx, revAns
+    int 21h
+    
+    mov revVal, bh
+    
+    mov cx, 8
+    
+    print:
+    shl bh, 1
+    jc isOne
+    jnc isZero
+    
+    isZero:  
+    mov ah, 2
+    mov dl, '0'
+    int 21h
+    jmp continuePrint
+  
+    isOne:
+    mov ah, 2
+    mov dl, '1'
+    int 21h
+    jmp continuePrint
+    
+    continuePrint:
+    loop print
     jmp exit
     
     exit:
