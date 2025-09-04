@@ -1,7 +1,3 @@
-;find no. of one's and zeros
-;is number odd of even
-;use reverse and see content in register
-
 .model small
 .stack 100h
 .data  
