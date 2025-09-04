@@ -27,7 +27,7 @@ main proc
     mov ds, ax  
     
     ;define value
-    mov value, 01h     ;10011011 reversed should be 11011001 which is D9h
+    mov value, 9bh     ;10011011 reversed should be 11011001 which is D9h
     mov bh, value
     
     ;even or odd test
